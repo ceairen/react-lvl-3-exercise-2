@@ -38,15 +38,20 @@ export default function Modal({
     }
   }
 
-  const modalPortal = createPortal(
-    <div
-      onClick={handleCloseModal}
-      className={`modalOverlay ${fullSize ? "fullsize" : ""}`}
-    >
-      <div className="modal">{children}</div>
-    </div>,
-    document.body
-  );
+  function setupModal() {
+    return (
+      <div
+        onClick={handleCloseModal}
+        className={`modalOverlay ${fullSize ? "fullsize" : ""}`}
+      >
+        <div className="modal">{children}</div>
+      </div>
+    );
+  }
 
-  return isOpen ? modalPortal : null;
+  const modal = setupModal();
+
+  const modalPortal = createPortal(modal, document.body);
+
+  return isOpen ? (fullSize ? modalPortal : modal) : null;
 }

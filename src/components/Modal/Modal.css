@@ -1,10 +1,12 @@
+.modalOverlay {
+    z-index: 9999999999;
+}
+
 .modalOverlay:not(.fullsize) {
-    pointer-events: none;
-    display: block;
+    display: inline-block;
 }
 
 .modalOverlay.fullsize {
-    pointer-events: all;
     display: flex;
     position: fixed;
     top: 0;
@@ -16,8 +18,13 @@
     align-items: center;
 }
 
-.modal {
+.modalOverlay.fullsize>.modal {
     min-width: 450px;
+    max-height: 90%;
+}
+
+.modal {
+    overflow: auto;
     background-color: white;
     border-radius: 5px;
     -webkit-box-shadow: 0px 10px 13px -7px #8f8f8f, 5px 5px 15px 5px rgba(0, 0, 0, 0);
@@ -46,6 +53,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
